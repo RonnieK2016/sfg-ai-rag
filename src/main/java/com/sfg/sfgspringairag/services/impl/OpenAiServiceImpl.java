@@ -32,7 +32,7 @@ public class OpenAiServiceImpl implements OpenAiService {
         List<String> contentList = documentList.stream().map(Document::getText).toList();
 
         PromptTemplate promptTemplate = new PromptTemplate(promptsConfig.getMovieExpertPrompt());
-        Prompt prompt = promptTemplate.create(Map.of("input", moviesRequest.question(), "document",
+        Prompt prompt = promptTemplate.create(Map.of("input", moviesRequest.question(), "documents",
                 String.join("\n", contentList)));
         ChatResponse chatResponse = chatModel.call(prompt);
         return new MoviesResponse(chatResponse.getResult().getOutput().getText());
