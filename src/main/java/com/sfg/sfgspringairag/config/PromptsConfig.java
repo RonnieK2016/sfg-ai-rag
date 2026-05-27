@@ -13,4 +13,7 @@ public class PromptsConfig {
     @Value("${movie-expert-prompt}")
     private String movieExpertPrompt;
 
+    @Value("${movie-expert-prompt-with-metadata}")
+    private String movieExpertPromptWithMetaData;
+
 }
