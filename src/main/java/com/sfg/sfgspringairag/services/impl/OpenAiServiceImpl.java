@@ -28,7 +28,7 @@ public class OpenAiServiceImpl implements OpenAiService {
     @Override
     public MoviesResponse getMoviesRecommendation(MoviesRequest moviesRequest) {
         List<Document> documentList = vectorStore.similaritySearch(SearchRequest.builder()
-                .query(moviesRequest.question()).topK(5).build());
+                .query(moviesRequest.question()).topK(4).build());
         List<String> contentList = documentList.stream().map(Document::getText).toList();
 
         PromptTemplate promptTemplate = new PromptTemplate(promptsConfig.getMovieExpertPrompt());

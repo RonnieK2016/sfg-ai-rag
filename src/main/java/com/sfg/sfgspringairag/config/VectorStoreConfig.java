@@ -1,7 +1,6 @@
 package com.sfg.sfgspringairag.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tika.Tika;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
@@ -36,6 +35,7 @@ public class VectorStoreConfig {
                 List<Document> splitDocs = splitter.apply(docs);
                 simpleVectorStore.add(splitDocs);
             });
+            simpleVectorStore.save(vectorStoreFile);
         }
         return simpleVectorStore;
     }
