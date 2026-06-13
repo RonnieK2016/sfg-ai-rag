@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: sfg.springai.rag
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      embedding:
+        model: text-embedding-3-small
+    vectorstore:
+      milvus:
+        client:
+          username: "root"
+          password: "milvus"
+        databaseName: "default"
+        collectionName: "movies_store"
+
+        initialize-schema: true
+        embeddingDimension: 1536
+        indexType: IVF_FLAT
+        metricType: COSINE
+sfg:
+  springai-rag:
+    vectorstore:
+      vectorStorePath: vectorstore.json
+      documentsToLoad: classpath:movies500.csv

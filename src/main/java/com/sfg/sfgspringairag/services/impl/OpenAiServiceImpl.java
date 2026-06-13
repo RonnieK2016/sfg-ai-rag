@@ -11,7 +11,7 @@ import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
-import org.springframework.ai.vectorstore.SimpleVectorStore;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,12 +23,12 @@ public class OpenAiServiceImpl implements OpenAiService {
 
     private final ChatModel chatModel;
     private final PromptsConfig promptsConfig;
-    private final SimpleVectorStore vectorStore;
+    private final VectorStore vectorStore;
 
     @Override
     public MoviesResponse getMoviesRecommendation(MoviesRequest moviesRequest) {
         List<Document> documentList = vectorStore.similaritySearch(SearchRequest.builder()
-                .query(moviesRequest.question()).topK(4).build());
+                .query(moviesRequest.question()).topK(5).build());
         List<String> contentList = documentList.stream().map(Document::getText).toList();
 
         PromptTemplate promptTemplate = new PromptTemplate(promptsConfig.getMovieExpertPromptWithMetaData());
